@@ -103,7 +103,7 @@ opentelemetry-instrument \
     --traces_exporter console \
     --metrics_exporter console \
     --logs_exporter console \
-    flask run
+    flask run -p 8080
 ```
 
 Open <http://localhost:8080/rolldice> in your web browser and reload the page a
@@ -299,7 +299,7 @@ Now run the app again:
 opentelemetry-instrument \
     --traces_exporter console \
     --metrics_exporter console \
-    flask run
+    flask run -p 8080
 ```
 
 When you send a request to the server, you'll see two spans in the trace emitted
@@ -404,7 +404,7 @@ from flask import Flask, request
 
 tracer = trace.get_tracer("diceroller.tracer")
 # Acquire a meter.
-meter = metrics.get_meter(diceroller.meter)
+meter = metrics.get_meter("diceroller.meter")
 
 # Now create a counter instrument to make measurements with
 roll_counter = meter.create_counter(
